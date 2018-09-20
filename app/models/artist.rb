@@ -9,7 +9,12 @@ class Artist < ActiveRecord::Base
 
   def self.find_by_slug(slug)
     artist_name = slug.split("-").collect do |word|
-      word.capitalize
+      case word
+      when "with","to","a","the"
+          word
+        else
+          word.capitalize
+      end
     end.join(" ")
     Artist.find_by_name(artist_name)
   end

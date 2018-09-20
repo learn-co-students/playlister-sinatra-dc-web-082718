@@ -9,7 +9,12 @@ class Genre < ActiveRecord::Base
 
   def self.find_by_slug(slug)
     genre_name = slug.split("-").collect do |word|
-      word.capitalize
+      case word
+      when "with","to","a","the"
+          word
+        else
+          word.capitalize
+      end
     end.join(" ")
     Genre.find_by_name(genre_name)
   end
