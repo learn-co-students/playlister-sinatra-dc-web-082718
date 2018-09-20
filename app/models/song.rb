@@ -8,15 +8,19 @@ class Song < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug)
-    song_name = slug.split("-").collect do |word|
-      case word
-      when "with","to","a","the"
-          word
-        else
-          word.capitalize
-      end
-    end.join(" ")
-    Song.find_by_name(song_name)
+    # song_name = slug.split("-").collect do |word|
+    #   case word
+    #   when "with","to","a","the"
+    #       word
+    #     else
+    #       word.capitalize
+    #   end
+    # end.join(" ")
+    # Song.find_by_name(song_name)
+
+    Song.all.find { |song|
+      song.slug == slug
+    }
   end
 
 end
